@@ -1,50 +1,98 @@
-# Motor Vibration Fault Detector (FFT + Health Score)
+# Motor Vibration Fault Detector
+### Predictive Maintenance Mini-Lab (NumPy + FFT)
 
-A lightweight, engineering-focused **predictive maintenance mini-lab** built using **NumPy**.  
-The project analyzes vibration time-series data from rotating machinery and produces an **interpretable health score (0–100)** along with **fault-type indicators** using time-domain statistics and FFT-based frequency analysis.
-
----
-
-## 🚀 Why this project?
-
-Vibration-based condition monitoring is widely used in:
-- Manufacturing plants
-- Robotics and automation
-- Water pumps and HVAC systems
-- Vehicle engines and rotating equipment
-
-This project demonstrates how **signal processing fundamentals** can be used to detect early fault patterns **without heavy machine learning**.
+A lightweight, engineering-focused vibration analysis system that detects early fault patterns in rotating machinery using time-domain statistics and frequency-domain FFT analysis.
 
 ---
 
-## 🔍 What does it do?
+## 📌 Project Purpose
 
-Given vibration data (CSV):
+Rotating machines such as motors, pumps, fans, and industrial equipment naturally produce vibration during operation.
 
-- Computes time-domain features (RMS, peak-to-peak, kurtosis, crest factor)
-- Performs FFT to extract dominant frequencies
-- Estimates rotating speed (1× frequency)
-- Detects fault-like patterns:
-  - **Imbalance**
-  - **Misalignment**
-  - **Bearing-like faults**
-- Generates:
-  - Health score (0–100)
-  - Fault flags
-  - Frequency report
-  - FFT plots
+When faults begin to develop — such as imbalance, misalignment, or bearing damage — vibration patterns change in measurable ways.
+
+This project simulates a simplified industrial vibration monitoring system that:
+
+- Analyzes vibration time-series data
+- Extracts meaningful signal features
+- Detects fault-like patterns
+- Produces an interpretable health score (0–100)
+
+No machine learning is used. The system is fully explainable and engineering-driven.
 
 ---
 
-## 📁 Project Structure
+## 🎯 Problem Statement
 
-motor-vibration-fault-detector/
-├── README.md
-├── requirements.txt
-├── src/ # Core feature extraction & logic
-├── notebooks/ # Analysis & reporting notebook
-├── sample_data/ # Example vibration CSV files
-├── scripts/ # Data generation utilities
-└── outputs/ # Generated reports & plots (ignored in git)
+Given vibration sensor data:
+
+Can we determine:
+- Whether the machine is healthy?
+- If abnormal vibration patterns exist?
+- What type of mechanical issue might be developing?
+
+---
+
+## ⚙️ How the System Works
+
+The system analyzes vibration signals in two domains:
+
+### 1️⃣ Time Domain Analysis
+Measures overall vibration behavior:
+- RMS Energy
+- Peak-to-Peak Amplitude
+- Kurtosis (impulsive behavior detection)
+- Crest Factor
+
+These indicate vibration severity and shock-like behavior.
+
+---
+
+### 2️⃣ Frequency Domain Analysis (FFT)
+The Fast Fourier Transform converts the signal into frequency components.
+
+This allows detection of:
+- 1× running frequency (imbalance indicator)
+- 2× harmonic (misalignment indicator)
+- High-frequency energy (bearing-related patterns)
+
+---
+
+## 🧠 Fault Logic (Engineering-Based)
+
+| Fault Type | Typical Indicator |
+|------------|-------------------|
+| Imbalance | Strong 1× frequency component |
+| Misalignment | Strong 2× harmonic component |
+| Bearing-like Fault | High kurtosis + high-frequency energy |
+
+---
+
+## ❤️ Health Score (0–100)
+
+The system assigns a deterministic health score:
+
+- Starts at 100
+- Deducts points based on:
+  - Excessive vibration energy
+  - High impulsiveness
+  - Abnormal frequency energy distribution
+  - Fault pattern detection
+
+Higher score → healthier machine.
+
+---
+
+## 📊 Input Data Format
+
+CSV file containing:
+
+### Preferred Format
+```csv
+time,accel
+0.0000,0.012
+0.0005,0.015
 
 
+
+MADE with ❤️ by Suwarna-Wave.
