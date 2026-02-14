@@ -71,7 +71,7 @@ def main():
     t, x = gen_signal(fs, secs, base_f, bearing=True, seed=4)
     save_csv("sample_data/bearing.csv", t, x)
 
-    print("✅ Generated sample vibration CSVs in sample_data/")
+    print("Generated sample vibration CSVs in sample_data/")
     print("   - normal.csv")
     print("   - imbalance.csv")
     print("   - misalignment.csv")

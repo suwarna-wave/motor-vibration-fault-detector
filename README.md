@@ -1,98 +1,136 @@
 # Motor Vibration Fault Detector
-### Predictive Maintenance Mini-Lab (NumPy + FFT)
+### Predictive Maintenance System (NumPy + FFT)
 
-A lightweight, engineering-focused vibration analysis system that detects early fault patterns in rotating machinery using time-domain statistics and frequency-domain FFT analysis.
+A production-ready vibration analysis system that detects mechanical faults in rotating machinery using engineering-based signal processing.
 
----
-
-## 📌 Project Purpose
-
-Rotating machines such as motors, pumps, fans, and industrial equipment naturally produce vibration during operation.
-
-When faults begin to develop — such as imbalance, misalignment, or bearing damage — vibration patterns change in measurable ways.
-
-This project simulates a simplified industrial vibration monitoring system that:
-
-- Analyzes vibration time-series data
-- Extracts meaningful signal features
-- Detects fault-like patterns
-- Produces an interpretable health score (0–100)
-
-No machine learning is used. The system is fully explainable and engineering-driven.
+![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
+![NumPy](https://img.shields.io/badge/NumPy-Powered-orange.svg)
+![Tests](https://img.shields.io/badge/Tests-22/22_Passing-green.svg)
 
 ---
 
-## 🎯 Problem Statement
+## 🚀 Quick Start
 
-Given vibration sensor data:
+```bash
+# 1. Install dependencies
+pip install -r requirements.txt
 
-Can we determine:
-- Whether the machine is healthy?
-- If abnormal vibration patterns exist?
-- What type of mechanical issue might be developing?
+# 2. Generate sample data
+python3 scripts/generate_sample_data.py
 
----
+# 3. Run analysis
+python3 scripts/analyze_vibration.py
 
-## ⚙️ How the System Works
+# 4. Generate visualizations
+python3 src/visualize.py
 
-The system analyzes vibration signals in two domains:
-
-### 1️⃣ Time Domain Analysis
-Measures overall vibration behavior:
-- RMS Energy
-- Peak-to-Peak Amplitude
-- Kurtosis (impulsive behavior detection)
-- Crest Factor
-
-These indicate vibration severity and shock-like behavior.
+# 5. Run tests
+python3 scripts/run_tests.py
+```
 
 ---
 
-### 2️⃣ Frequency Domain Analysis (FFT)
-The Fast Fourier Transform converts the signal into frequency components.
+## 📊 System Capabilities
 
-This allows detection of:
-- 1× running frequency (imbalance indicator)
-- 2× harmonic (misalignment indicator)
-- High-frequency energy (bearing-related patterns)
-
----
-
-## 🧠 Fault Logic (Engineering-Based)
-
-| Fault Type | Typical Indicator |
-|------------|-------------------|
-| Imbalance | Strong 1× frequency component |
-| Misalignment | Strong 2× harmonic component |
-| Bearing-like Fault | High kurtosis + high-frequency energy |
+✅ **Time-Domain Analysis** - RMS, kurtosis, crest factor, peak-to-peak  
+✅ **Frequency-Domain Analysis** - FFT, spectral energy, peak detection  
+✅ **Fault Detection** - Imbalance, misalignment, bearing faults  
+✅ **Health Scoring** - 0-100 score with status levels  
+✅ **Automated Reporting** - Detailed diagnostics with recommendations  
+✅ **Visualization** - Time & frequency domain plots  
+✅ **Comprehensive Testing** - 22 automated tests  
 
 ---
 
-## ❤️ Health Score (0–100)
+## 🎯 What It Does
 
-The system assigns a deterministic health score:
+Analyzes vibration sensor data to detect mechanical faults:
 
-- Starts at 100
-- Deducts points based on:
-  - Excessive vibration energy
-  - High impulsiveness
-  - Abnormal frequency energy distribution
-  - Fault pattern detection
-
-Higher score → healthier machine.
+| Fault Type | Detection Method | Key Indicators |
+|------------|------------------|----------------|
+| **Imbalance** | Strong 1× frequency | Uneven rotor mass |
+| **Misalignment** | Strong 2× harmonic | Shaft alignment issues |
+| **Bearing Fault** | High kurtosis + HF energy | Impulsive spikes |
 
 ---
 
-## 📊 Input Data Format
+## 📁 Project Structure
 
-CSV file containing:
+```
+motor-vibration-fault-detector/
+├── src/
+│   ├── features.py        # Time & frequency domain features
+│   ├── diagnostics.py     # Fault detection & health scoring
+│   ├── visualize.py       # Plotting capabilities
+│   └── io_utils.py        # Data loading
+├── scripts/
+│   ├── analyze_vibration.py      # Main analysis script
+│   ├── generate_sample_data.py   # Generate test data
+│   └── run_tests.py              # Test suite
+├── sample_data/          # Generated CSV files
+└── outputs/              # Analysis plots
+```
 
-### Preferred Format
-```csv
-time,accel
-0.0000,0.012
-0.0005,0.015
+---
 
+## 🔬 Technical Details
 
+### Feature Extraction
 
-MADE with ❤️ by Suwarna-Wave.
+```python
+from src.features import extract_fault_indicators
+
+features = extract_fault_indicators(accel, fs=2000, running_freq=30.0)
+# Returns: RMS, kurtosis, 1× amplitude, 2× amplitude, HF energy, etc.
+```
+
+### Complete Diagnostics
+
+```python
+from src.diagnostics import diagnose_vibration
+
+report = diagnose_vibration(accel, fs=2000, running_freq=30.0)
+print(f"Health: {report['health_score']}/100")
+print(f"Fault: {report['primary_fault']}")
+```
+
+---
+
+## 📈 Example Results
+
+```
+🚨 HEALTH SCORE: 30/100 (CRITICAL)
+🔍 PRIMARY FAULT: BEARING
+📈 KEY INDICATORS:
+   Kurtosis:        36.85  ← Highly impulsive
+   Crest Factor:    12.42  ← Shock impacts
+   HF Energy:       0.049  ← Elevated
+
+💡 RECOMMENDATIONS:
+   ⚠ Bearing fault indicators present
+   🚨 CRITICAL: Schedule immediate maintenance
+```
+
+---
+
+## 🧪 Validation
+
+All 22 tests passing:
+- ✅ Feature calculation accuracy
+- ✅ Fault detection logic
+- ✅ Health score correctness
+- ✅ Edge case handling
+
+---
+
+## 🎓 Learning Resources
+
+This project demonstrates:
+- Signal processing with FFT
+- Engineering-based diagnostics
+- Test-driven development
+- Modular software design
+
+---
+
+**MADE with ❤️ by Suwarna-Wave**
