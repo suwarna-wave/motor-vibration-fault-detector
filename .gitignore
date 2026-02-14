@@ -16,3 +16,4 @@ outputs/
 # Virtual Environments
 venv/
 env/
+.venv/
